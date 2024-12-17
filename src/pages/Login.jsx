@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import singInLottie from "../assets/signin.json"
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
+import axios from "axios";
 
 
 const Login = () => {
@@ -24,8 +25,15 @@ const Login = () => {
     loginUser(email, password)
       .then((result) => {
         setUser(result.user);
-        console.log(result.user);
-        navigate(from)
+        // JWT token
+        const user = {email: email}
+        axios.post("http://localhost:3000/jwt", user, {
+          withCredentials: true
+        })
+        .then(data => {
+          console.log(data.data)
+        })
+        navigate(from);
       })
       .catch((error) => {
         console.log(error);

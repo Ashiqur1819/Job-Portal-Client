@@ -17,13 +17,11 @@ const Register = () => {
         const password = form.password.value
 
         const user = {name, email}
-        // console.log({name, email, password})
 
         // Firebase authentication
         createUser(email, password)
         .then(result => {
           setUser(result.user)
-          console.log(result.user)
         })
         .catch((error) => {
           console.log(error)

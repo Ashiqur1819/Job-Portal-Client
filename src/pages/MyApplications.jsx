@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { AuthContext } from "../provider/AuthProvider";
 import { CiCircleRemove } from "react-icons/ci";
+import axios from "axios";
 
 const MyApplications = () => {
     
@@ -9,13 +10,20 @@ const MyApplications = () => {
     const [jobs, setJobs] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:3000/application?email=${user.email}`)
-        .then(res => res.json())
-        .then(data => {
-            setJobs(data)
+        // fetch(`http://localhost:3000/application?email=${user.email}`)
+        // .then(res => res.json())
+        // .then(data => {
+        //     setJobs(data)
+        // })
+        // .catch(error => {
+        //     console.log(error)
+        // })
+
+        axios.get(`http://localhost:3000/application?email=${user.email}`, {
+          withCredentials: true
         })
-        .catch(error => {
-            console.log(error)
+        .then(res => {
+          setJobs(res.data);
         })
     },[])
 

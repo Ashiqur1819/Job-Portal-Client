@@ -44,7 +44,6 @@ const ApplyJob = () => {
             });
             navigate("/my_applications")
             }
-            console.log(data);
         })
         .catch(error => {
             console.log(error)
